@@ -25,6 +25,9 @@ class IntegerStateMachine:
             state = self.transitions[key]
         return state
 
+    def validate(self, state: str):
+        return state in self.final_states
+
 
 
 def mod_three(state: IntegerStateMachine):
