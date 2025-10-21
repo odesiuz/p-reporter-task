@@ -5,13 +5,23 @@
     File Name: integer_state.py
 """
 class IntegerStateMachine:
-    def __init__(self, states: set, input_symbols: set, initial_state: str, final_states: set, transitions: dict = None):
+    def __init__(self, states: set, input_values: set, initial_state: str, final_states: set, transitions: dict):
         self.states = states
-        self.input_values = input_symbols
+        self.input_values = input_values
         self.initial_state = initial_state
         self.final_states = final_states
-        self.transitions = transitions if transitions else {}
-        self.modulus_value = None
+        self.transitions = transitions
+
+        # Validate the state machine configuration
+        if self.initial_state not in self.states:
+            raise ValueError(f"Initial state {initial_state} is not in the set of states.")
+        if not self.final_states.issubset(self.states):
+            raise ValueError("Final states must be a subset of the set of states.")
+        for (state, input_value), next_state in transitions.items():
+            if state not in self.states:
+                raise ValueError(f"State {state} in transitions is not in the set of states.")
+            if input_value not in self.input_values:
+                raise ValueError(f"Input value {input_value} in transitions is not in the set of input values.")
 
     def process_input(self, values: str):
         state = self.initial_state
@@ -21,7 +31,7 @@ class IntegerStateMachine:
             key = (state, input_value)
             if key not in self.transitions:
                 raise ValueError(f"No transition defined for state {state} with input {input_value}")
-            state = self.transitions[key]
+            state = self.transitions.get(key)
         return state
 
     def validate(self, state: str):
@@ -36,7 +46,7 @@ def mod_three(state_machine: IntegerStateMachine, binary_str: str):
 
 if __name__ == '__main__':
     states = {'S0', 'S1', 'S2'}
-    input_symbols = {'0', '1'}
+    input_values = {'0', '1'}
     initial_state = 'S0'
     final_states = {'S0', 'S1', 'S2'}
     transitions = {
@@ -48,8 +58,8 @@ if __name__ == '__main__':
         ('S2', '1'): 'S2',
     }
 
-    fsm = IntegerStateMachine(states, input_symbols, initial_state, final_states, transitions)
+    finite_state_machine = IntegerStateMachine(states, input_values, initial_state, final_states, transitions)
 
     binary_input = "1101"
-    result = mod_three(fsm, binary_input)
+    result = mod_three(finite_state_machine, binary_input)
     print(f"The integer value of binary '{binary_input}' modulo 3 is: {result}")
