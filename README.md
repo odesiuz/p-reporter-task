@@ -1,6 +1,22 @@
 # p-reporter-task
 
-### 
+### 1. Modulo 3 State Machine
+This directory ([src](src)) contains a python implementation of a state machine for calculating the value of a binary integer modulo 3. The state machine is designed to process binary input strings and determine the remainder when the binary number is divided by 3. 
+This implementation uses the general purpose Deterministic Finite Automation (DFA) to implement this solution without having to convert string to int type.
+The following key components are contained in the [integer_state_fsm.py](src/integer_state_fsm.py), [modulo_three_fsm.py](src/modulo_three_fsm.py) and [main.py](src/main.py) file:
+1. **IntegerStateMachine Class**: This is a generic class used to implement a DFA. It is initialized with a set of states, input values, an initial state, a set of final states, and a transition function that defines how the machine moves between states based on input value. It has a method `process_input` that takes a binary string as input and processes it character by character, transitioning between states according to the transition function.
+2. **ModThreeStateMachine**: This class inherits from IntegerStateMachine and is specifically designed to calculate the modulo 3 of a binary integer. It defines the states (representing remainders `0, 1, and 2`), input values (`0 and 1`), initial state (`0`), final states (`0, 1, 2`), and the transition function based on the rules of binary arithmetic modulo 3.
+3. **Main Function**: The main function creates an instance of ModThreeStateMachine and processes a sample binary input string (`"1101"`). It prints the final state of the machine, which represents the modulo 3 value of the binary integer.
+
+### Why a Deterministic Finite Automaton (DFA)?
+There are 2 choices when implementing a state machine: DFA and NFA (Nondeterministic Finite Automaton) See [Introduction of Finite Automata](https://www.geeksforgeeks.org/theory-of-computation/introduction-of-finite-automata/).
+I chose DFA because it is the most natural model to solve this problem. In DFA, for each state and input symbol, there is exactly one transition to a next state. This property makes DFA easier to implement and understand, especially for problems like calculating modulo values where the transitions are deterministic and straightforward. Thus using NFA would add unnecessary complexity to the implementation without providing any additional benefits for this specific problem.
+
+### How to Run the Code
+To run the code, ensure you have Python installed on your system. You can execute the script by running the following command in your terminal:
+```bash
+python -m src.main 1101
+```
 
 
 
@@ -11,7 +27,7 @@
 
 
 
-### Data Architecture for a restaurant exercise
+### 2. Data Architecture for a restaurant exercise
 This repository contains the data architecture for a restaurant exercise, including the necessary tables to create and populate the database tables.
 The architecture is designed to handle various aspects of restaurant management, including item menu items, sales, store/franchise, and fact tables.
 
