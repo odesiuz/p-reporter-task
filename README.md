@@ -1,1 +1,56 @@
 # p-reporter-task
+
+### 
+
+
+
+
+
+
+
+
+
+
+### Data Architecture for a restaurant exercise
+This repository contains the data architecture for a restaurant exercise, including the necessary tables to create and populate the database tables.
+The architecture is designed to handle various aspects of restaurant management, including item menu items, sales, store/franchise, and fact tables.
+
+In designing this architecture, I made use of the Star Schema model with sales fact table and dimensions, which is a common approach for organizing data in a data warehouse. This model allows for efficient querying and analysis of large datasets, making it well-suited for the restaurant exercise.
+Looking at the issue from a high level, the data architecture includes the following components:
+- **Dimensional Tables**: These tables store the dimensions of the data, such as menu items, stores/franchises, store menu, item, category, sales and time. They provide context for the fact tables and are used for filtering and grouping data in queries.
+- **Fact Table**: This central table store the quantitative data related to restaurant operations, such as time, store, item and/or category. This table is denormalized and allows for OLAP operations They contain foreign keys that reference the dimensional tables, allowing for efficient querying and analysis of the data.
+
+Below is a diagram illustrating the data architecture for the restaurant exercise:
+![Data Architecture Diagram](data_architecture/Data%20Architect%201.png)
+link to open dbdiagram.io: https://dbdiagram.io/d/Data-Architect-p-reporter-task-68f82ad12e68d21b419bf502
+
+In modelling this data architecture, we considered various factors such as data volume, query performance, and ease of maintenance. We also ensured that the architecture is flexible enough to accommodate future changes and additions to the data model.
+### Table Descriptions
+1. **DimStores**: This table contains information about the stores or franchises of the restaurant, including store ID, store name, location, date it was opened.
+2. **DimTime**: This table contains information about the time dimension, including week start date, day of the week, month, quarter, and year.
+3. **DimItems**: This table contains information about the menu items, including item ID, item name, category, price.
+4. **FactSales**: This table contains information about the sales transactions, including store ID, item ID, quantity sold
+5. **Other Supporting Tables**: These tables include Category, StoreMenu and Sales, which provide additional context and information for the dimensional tables.
+
+This schema provides a solid foundation for managing and analyzing restaurant data, and can be extended or modified as needed to meet the specific requirements of the exercise.
+
+### Ingestion pipeline and Technologies Used
+An assumption is made that we will be using the AWS ecosystem for building the ingestion pipeline. The following technologies will be used:
+- **AWS Kinesis**: This service will be used to collect and process real-time data streams from various sources, such as point-of-sale systems, online orders, and customer feedback.
+- **AWS S3**: This service will be used to store the raw data collected from Kinesis streams in a scalable and cost-effective manner OR .
+- **AWS Redshift**: This service can be used instead of AWS S3 to store and analyze the processed data in a data warehouse environment from Kinesis, allowing for efficient querying and reporting. This is because redshift supports fast SQL queries, large fact tables, star schema and now supports streaming data ingestion.
+- **AWS Glue or Lambda Functions**: This service will be used to perform ETL (Extract, Transform, Load) operations on the data stored in S3 or Redshift, transforming it into a format suitable for analysis and loading it into the dimensional and fact tables.
+
+### Questions for Clarification
+To ensure a successful implementation of the data architecture and ingestion pipeline, the following questions need to be clarified:
+1. What is the estimated volume of data to be ingested and processed on a daily
+2. How frequently is the data updated or changed?
+3. What are the data formats and sources for the data to be ingested?
+4. How do the franchise/store submit their sales data? Is it through a centralized system or individual systems? Is it via file uploads, APIs, or other methods?
+5. What is the granularity of the report required to be generated? Is it daily, weekly, monthly, or quarterly?
+
+### Assumptions
+1. I assumed each franchise has a unique store id and uses a common item_id for the same menu item across all franchises.
+2. I assumed that the sales data is collected at the item level, meaning that each sale transaction is recorded for each individual menu item sold.
+3. I assumed that all franchises/stores follow a standardized menu structure, with consistent item and categories across all locations.
+
