@@ -4,26 +4,19 @@
     Author Email: 
     File Name: main.py
 """
-from src.integer_state import IntegerStateMachine
-from src.modulo_functions import mod_three
+from src.modulo_functions import ModThreeStateMachine
+import argparse
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Compute the modulo 3 of a binary number using a state machine.')
+    parser.add_argument('binary_input', type=str, help='Binary string input (e.g., "1101")')
+    return parser.parse_args()
 
 if __name__ == '__main__':
-    states = {'S0', 'S1', 'S2'}
-    input_values = {'0', '1'}
-    initial_state = 'S0'
-    final_states = {'S0', 'S1', 'S2'}
-    transitions = {
-        ('S0', '0'): 'S0',
-        ('S0', '1'): 'S1',
-        ('S1', '0'): 'S2',
-        ('S1', '1'): 'S0',
-        ('S2', '0'): 'S1',
-        ('S2', '1'): 'S2',
-    }
+    args = parse_args()
+    mod_three_machine = ModThreeStateMachine()
 
-    finite_state_machine = IntegerStateMachine(states=states, input_values=input_values, initial_state=initial_state,
-                                               final_states=final_states, transitions=transitions)
+    binary_input = args.binary_input # we can also add a check for valid binary input here though the state machine will handle invalid inputs
+    result = mod_three_machine.mod_three(binary_input)
 
-    binary_input = "1101"
-    result = mod_three(finite_state_machine, binary_input)
-    print(f"The integer value of binary '{binary_input}' modulo 3 is: {result}")
+    print(f"The number represented by binary '{binary_input}' modulo 3 is: {result}")
