@@ -2,7 +2,7 @@
     Date: 2025-10-19
     Time: 5:15p.m.
     Author Email: 
-    File Name: integer_state.py
+    File Name: integer_state_fsm.py
 """
 class IntegerStateMachine:
     """

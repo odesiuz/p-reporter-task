@@ -2,9 +2,9 @@
     Date: 2025-10-22
     Time: 11:32a.m.
     Author Email: 
-    File Name: modulo_functions.py
+    File Name: modulo_three_fsm.py
 """
-from src.integer_state import IntegerStateMachine
+from src.integer_state_fsm import IntegerStateMachine
 
 class ModThreeStateMachine(IntegerStateMachine):
     """
