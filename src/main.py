@@ -4,7 +4,7 @@
     Author Email: 
     File Name: main.py
 """
-from src.modulo_functions import ModThreeStateMachine
+from src.modulo_three_fsm import ModThreeStateMachine
 import argparse
 
 def parse_args():
