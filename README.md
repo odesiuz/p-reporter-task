@@ -1,6 +1,6 @@
 # p-reporter-task
 
-### 1. Modulo 3 State Machine
+## 1. Modulo 3 State Machine
 This directory ([src](src)) contains a python implementation of a state machine for calculating the value of a binary integer modulo 3. The state machine is designed to process binary input strings and determine the remainder when the binary number is divided by 3. 
 This implementation uses the general purpose Deterministic Finite Automation (DFA) to implement this solution without having to convert string to int type.
 The following key components are contained in the [integer_state_fsm.py](src/integer_state_fsm.py), [modulo_three_fsm.py](src/modulo_three_fsm.py) and [main.py](src/main.py) file:
@@ -18,16 +18,7 @@ To run the code, ensure you have Python installed on your system. You can execut
 python -m src.main 1101
 ```
 
-
-
-
-
-
-
-
-
-
-### 2. Data Architecture for a restaurant exercise
+## 2. Data Architecture for a restaurant exercise
 This repository contains the data architecture for a restaurant exercise, including the necessary tables to create and populate the database tables.
 The architecture is designed to handle various aspects of restaurant management, including item menu items, sales, store/franchise, and fact tables.
 
