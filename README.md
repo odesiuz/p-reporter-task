@@ -1,4 +1,7 @@
-# p-reporter-task
+# Binary Integer Modulo 3 State Machine and Restaurant Data Architecture
+This repository contains two main components:
+1. A Python implementation of a state machine that calculates the value of a binary integer modulo 3 using a Deterministic Finite Automaton (DFA).
+2. A data architecture design for a restaurant exercise, including the necessary tables to create and populate the database tables.
 
 ## 1. Modulo 3 State Machine
 This directory ([src](src)) contains a python implementation of a state machine for calculating the value of a binary integer modulo 3. The state machine is designed to process binary input strings and determine the remainder when the binary number is divided by 3. 
